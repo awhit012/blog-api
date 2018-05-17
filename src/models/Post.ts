@@ -11,13 +11,6 @@ const PostSchema: Schema = new Schema({
     default: '',
     required: true
   },
-  slug: {
-    type: String,
-    default: '',
-    required: true,
-    unique: true,
-    trim: true
-  },
   content: {
     type: String,
     default: '',

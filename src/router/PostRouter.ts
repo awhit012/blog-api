@@ -21,11 +21,11 @@ export class PostRouter {
     });
   }
 
-  // get a single post by params of 'slug'
+  // get a single post by params of '_id'
   public one(req: Request, res: Response): void {
-    const slug: string = req.params.slug;
+    const id: string = req.params.id;
     
-    Post.findOne({slug})
+    Post.findOne({_id: id})
     .then((data) => {
       res.status(200).json({ data });
     })
@@ -37,19 +37,17 @@ export class PostRouter {
   // create a new post
   public create(req: Request, res: Response): void {
     const title: string = req.body.title;
-    const slug: string = req.body.slug;
     const content: string = req.body.content;
     const featuredImage: string = req.body.featuredImage;
     const category: string = req.body.category;
     const published: boolean = req.body.published;
 
-    if (!title || !slug || !content) {
+    if (!title || !content) {
       res.status(422).json({ message: 'All Fields Required.' });
     }
 
     const post = new Post({
       title,
-      slug,
       content,
       featuredImage,
       category,
@@ -65,11 +63,11 @@ export class PostRouter {
     });
   }
 
-  // update post by params of 'slug'
+  // update post by params of 'id'
   public update(req: Request, res: Response): void {
-    const slug: string = req.body.slug;
+    const id: string = req.body._id;
 
-    Post.findOneAndUpdate({slug}, req.body)
+    Post.findOneAndUpdate({_id: id}, req.body)
     .then((data) => {
       res.status(200).json({ data });
     })
@@ -78,11 +76,11 @@ export class PostRouter {
     });
   }
 
-  // delete post by params of 'slug'
+  // delete post by params of 'id'
   public delete(req: Request, res: Response): void {
-    const slug: string = req.body.slug;
+    const id: string = req.body._id;
 
-    Post.findOneAndRemove({slug})
+    Post.findOneAndRemove({_id: id})
     .then(() => {
       res.status(204).end();
     })
@@ -93,10 +91,10 @@ export class PostRouter {
 
   public routes() {
     this.router.get('/', this.all);
-    this.router.get('/:slug', this.one);
+    this.router.get('/:id', this.one);
     this.router.post('/', this.create);
-    this.router.put('/:slug', this.update);
-    this.router.delete('/:slug', this.delete);
+    this.router.put('/:id', this.update);
+    this.router.delete('/:id', this.delete);
   }
 
 }
