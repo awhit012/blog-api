@@ -103,5 +103,5 @@ export class PostRouter {
 
 const postRoutes = new PostRouter();
 postRoutes.routes();
-
-export default postRoutes.router;
+const router = postRoutes.router;
+export default router;

@@ -10,6 +10,7 @@ import * as path from 'path';
 import PostRouter from './router/PostRouter';
 import UserRouter from './router/UserRouter';
 
+
 class Server {
 
   // set app to be of type express.Application
@@ -19,6 +20,10 @@ class Server {
     this.app = express();
     this.config();
     this.routes();
+    let port = process.env.PORT || 8080;
+    this.app.listen(port);
+
+
   }
   
   // application config
@@ -35,6 +40,7 @@ class Server {
     this.app.use(compression());
     this.app.use(helmet());
     this.app.use(cors());
+
 
     // cors
     this.app.use((req, res, next) => {
@@ -54,6 +60,7 @@ class Server {
     this.app.use('/', router);
     this.app.use('/api/v1/posts', PostRouter);
     this.app.use('/api/v1/users', UserRouter);
+
   }
 }
 
