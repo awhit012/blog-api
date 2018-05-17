@@ -1,9 +1,9 @@
-# TypeScript Express Server (TES)
+# API for Fibro Blog
 
-This is a sample server using Express, TypeScript, MongoDB, and Mongoose.
+## Built in TypeScript and Express Server using Webpack
 
-### Getting Started
+Cobbled together with love using: 
 
-`yarn install`
+- https://github.com/jsecademy/webpack-express-typescript
+- https://github.com/iamclaytonray/tes/blob/master/src/server.ts
 
-`yarn server`
