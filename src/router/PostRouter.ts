@@ -65,9 +65,9 @@ export class PostRouter {
 
   // update post by params of 'id'
   public update(req: Request, res: Response): void {
-    const id: string = req.body._id;
-
-    Post.findOneAndUpdate({_id: id}, req.body)
+    const id: string = req.params.id;
+    console.log(req.body)
+    Post.findByIdAndUpdate(id, req.body)
     .then((data) => {
       res.status(200).json({ data });
     })
@@ -78,10 +78,11 @@ export class PostRouter {
 
   // delete post by params of 'id'
   public delete(req: Request, res: Response): void {
-    const id: string = req.body._id;
-
-    Post.findOneAndRemove({_id: id})
-    .then(() => {
+    const id: string = req.params.id;
+    console.log(id)
+    Post.findByIdAndRemove(id)
+    .then((obj) => {
+      console.log(obj)
       res.status(204).end();
     })
     .catch((error) => {
