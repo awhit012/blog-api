@@ -29,8 +29,11 @@ class Server {
   // application config
   public config(): void {
 
-    const MONGO_URI: string = 'mongodb://localhost/tes'; 
-    mongoose.connect(MONGO_URI || process.env.MONGODB_URI);
+    if (process.env.NODE_ENV == "production") {
+      mongoose.connect(process.env.MLAB_URL)
+    } else {
+      mongoose.connect("mongodb://localhost/tes");
+    }
 
     // express middleware
     this.app.use(bodyParser.urlencoded({ extended: true }));
