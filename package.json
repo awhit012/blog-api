@@ -7,7 +7,7 @@
     "build": "node node_modules/webpack/bin/webpack.js --config config/webpack.config.js",
     "postinstall": "node node_modules/typings/dist/bin.js install --overwrite",
     "start-dev": "nodemon build/compiled.js",
-    "start": "node build/compiled.js"
+    "start": "node node_modules/webpack/bin/webpack.js --config config/webpack.config.js && node node_modules/typings/dist/bin.js install --overwrite && node build/compiled.js"
   },
   "dependencies": {
     "@cli-engine/engine": "^6.3.3",
