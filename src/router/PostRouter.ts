@@ -40,7 +40,6 @@ export class PostRouter {
     const content: string = req.body.content;
     const featuredImage: string = req.body.featuredImage;
     const category: string = req.body.category;
-    const published: boolean = req.body.published;
 
     if (!title || !content) {
       res.status(422).json({ message: 'All Fields Required.' });
@@ -51,7 +50,6 @@ export class PostRouter {
       content,
       featuredImage,
       category,
-      published
     });
 
     post.save()
@@ -67,8 +65,10 @@ export class PostRouter {
   public update(req: Request, res: Response): void {
     const id: string = req.params.id;
     console.log(req.body)
-    Post.findByIdAndUpdate(id, req.body)
+    console.log("id type", typeof id)
+    Post.findByIdAndUpdate(id, req.body, {new: true})
     .then((data) => {
+      console.log(data)
       res.status(200).json({ data });
     })
     .catch((error) => {
