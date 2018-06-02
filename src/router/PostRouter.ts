@@ -21,6 +21,45 @@ export class PostRouter {
     });
   }
 
+  public like(req: Request, res: Response): void {
+    const id: string = req.params.id;
+    console.log(id)
+    Post.findOne({_id: id})
+      .then((post) => {
+        console.log("post", post)
+        post.likes += 1;
+        post.save()
+          .then((data) => {
+            res.status(204).json({ data });
+          })
+          .catch((error) => {
+            res.status(500).json({ error });
+          });
+      })
+      .catch((error) => {
+        res.status(500).json({ error });
+      })
+  }
+
+  public unLike(req: Request, res: Response): void {
+    const id: string = req.params.id;
+    Post.findOne({_id: id})
+      .then((post) => {
+        post.likes > 0 ? post.likes -= 1 : "";
+        
+        post.save()
+          .then((data) => {
+            res.status(204).json({ data });
+          })
+          .catch((error) => {
+            res.status(500).json({ error });
+          });
+      })
+      .catch((error) => {
+        res.status(500).json({ error });
+      })
+  }
+
   // get a single post by params of '_id'
   public one(req: Request, res: Response): void {
     const id: string = req.params.id;
@@ -87,11 +126,15 @@ export class PostRouter {
     });
   }
 
+
+
   public routes() {
     this.router.get('/', this.all);
     this.router.get('/:id', this.one);
     this.router.post('/', this.create);
     this.router.put('/:id', this.update);
+    this.router.put('/:id/like', this.like);
+    this.router.put('/:id/unlike', this.unLike);
     this.router.delete('/:id', this.delete);
   }
 
