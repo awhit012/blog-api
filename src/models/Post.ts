@@ -20,9 +20,9 @@ const PostSchema: Schema = new Schema({
     type: String,
     default: ''
   },
-  category: {
-    type: String,
-    default: ''
+  categories: {
+    type: Array,
+    default: []
   },
   likes: {
     type: Number,
