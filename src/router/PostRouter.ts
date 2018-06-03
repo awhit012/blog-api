@@ -78,8 +78,7 @@ export class PostRouter {
     const title: string = req.body.title;
     const content: string = req.body.content;
     const featuredImage: string = req.body.featuredImage;
-    const categories = [];
-    categories.push(req.body.categories)
+    const categories = req.body.categories;
 
     if (!title || !content) {
       res.status(422).json({ message: 'All Fields Required.' });
