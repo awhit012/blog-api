@@ -24,6 +24,10 @@ const PostSchema: Schema = new Schema({
     type: Array,
     default: []
   },
+  citations: {
+    type: Array,
+    default: []
+  },
   likes: {
     type: Number,
     default: 0

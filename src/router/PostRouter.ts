@@ -79,25 +79,30 @@ export class PostRouter {
     const content: string = req.body.content;
     const featuredImage: string = req.body.featuredImage;
     const categories = req.body.categories;
-
+    const citations = req.body.citations;
+    console.log('req.body', req.body)
     if (!title || !content) {
       res.status(422).json({ message: 'All Fields Required.' });
+    } else {
+      console.log("hello", req.body)
+
+      const post = new Post({
+        title,
+        content,
+        featuredImage,
+        categories,
+        citations
+      });
+
+      post.save()
+      .then((data) => {
+        res.status(201).json({ data });
+      })
+      .catch((error) => {
+        res.status(500).json({ error });
+      });
     }
-
-    const post = new Post({
-      title,
-      content,
-      featuredImage,
-      categories,
-    });
-
-    post.save()
-    .then((data) => {
-      res.status(201).json({ data });
-    })
-    .catch((error) => {
-      res.status(500).json({ error });
-    });
+    
   }
 
   // update post by params of 'id'
